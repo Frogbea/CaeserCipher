@@ -1,4 +1,9 @@
+# 1.1 welcome the user
+
+# global varible
 error_highlight = '*****'
+
+# functions
 
 def num_checker(nameInput):
     while True:
@@ -10,7 +15,8 @@ def num_checker(nameInput):
         else:
             break
     return nameStr
-        
+
+# main
 
 print('Hello! Welcome to the cipher program')
 name = num_checker('Please enter your name: ')
