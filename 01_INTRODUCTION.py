@@ -1,4 +1,4 @@
-# 1.1 welcome the user
+# 1.1 welcome the user [current]
 
 # global varible
 error_highlight = '*****'
