@@ -2,7 +2,7 @@
 # T1 this is the second option
 
 # imports
-import shelve as s
+import json as j
 
 # Global varible set-up
 error_highlight = '*****'
@@ -61,41 +61,31 @@ def cipherChoice(choice):
 
 # **********************************************
 # Main program
-shelve_file = s.open('storeUsername')
+# setting up the file/information for storing usernames
+filename = 'storeUser.json'
+userName = []
+jDump = j.dumps(userName)
+jData = j.loads(jDump)
 
 # Welcome user
 print('Hello! Welcome to the cipher program')
 
-# creating a username
-userName = []
-createUser = input('Please create a username: ')
-userName.append(createUser)
-shelve_file['userName'] = userName
-shelve_file.close()
-
-shelve_file = s.open('storeUsername')
-
-# print old data
-print(f'Old Data = {shelve_file["userName"]}')
-
-# update data 
-shelve_file['userName'] = userName
-
-# print updated data 
-print(f'Updated Data = {shelve_file["userName"]}')
-
-# to make changes permanent
-shelve_file.sync()
-
-# now, we simply close the shelf file.
-shelve_file.close()
-
-# pulling old usernames
-shelve_file = s.open('storeUsername')
-oldUser = shelve_file['userName']
-shelve_file.close()
-print(oldUser)
-
+# ask for previous user
+prevUser = input('Do you already have a username?').lower()
+if prevUser == 'yes':
+    print('welcome or whatever')
+elif prevUser == 'no':
+    # reads previous data
+    file = open(filename, 'r')
+    userName = j.load(file)
+    file.close()
+    # creates new username
+    createUser = input('Please create a username:')
+    userName.append(createUser)
+    # adds new userna,e to file
+    file = open(filename, 'w')
+    j.dump(userName, file)
+    file.close()
 
 # asks if the user wants to view instructions, and acts accordingly
 instructions('Would you like to read the instructions, (enter "y" or "n"):')
