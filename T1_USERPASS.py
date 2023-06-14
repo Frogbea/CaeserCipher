@@ -3,6 +3,7 @@
 
 # imports
 import json as j
+import os
 
 # Global varible set-up
 error_highlight = '*****'
@@ -63,9 +64,12 @@ def cipherChoice(choice):
 # Main program
 # setting up the file/information for storing usernames
 filename = 'storeUser.json'
-userName = []
+userName = ['initial value']
+# with open(filename, mode='w') as f:
+    # j.dump(userName, f)
 jDump = j.dumps(userName)
 jData = j.loads(jDump)
+
 
 # Welcome user
 print('Hello! Welcome to the cipher program')
