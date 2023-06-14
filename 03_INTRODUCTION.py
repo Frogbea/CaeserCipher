@@ -1,6 +1,6 @@
 # 1.1 welcome the user [finished]
 # 1.2 instructions [finished]
-# 1.3 which cipher encode/decode
+# 1.3 which cipher encode/decode [current]
 
 # global (constant?) varibles
 error_highlight = '*****'
@@ -19,6 +19,7 @@ def num_checker(nameInput):
     return nameStr
 
 def instructions(yesNo):
+
     # loop checks what the user chooses and acts accordingly
     while True:
         instrucView = input(yesNo).lower()
@@ -33,6 +34,23 @@ def instructions(yesNo):
             print('{}Please enter "y" for yes or "n" for no!{}'.format(error_highlight, error_highlight))
     return 
 
+def userEnDc(message):
+    while True:
+        # try & except to catch erros
+        try:
+            enDcinput = int(input(message))
+            # sets to true if user picks encode
+            if enDcinput == 1:
+                return True
+                break
+            # sets to false if user picks decode
+            elif enDcinput == 2:
+                return False
+                break
+        except ValueError:
+            # prints error if user does anything else
+            print('{}Please enter 1 or 2!{}'.format(error_highlight, error_highlight))
+
 # Main
 
 # gets user's name and welcomes
@@ -43,3 +61,12 @@ print('Welcome ' + name)
 # asks if the user wants to view instructions, and acts accordingly
 instructions('Would you like to read the instructions, (enter "y" or "n"):')
 print('program continues')
+
+# ask if user wants to encrypt or depcrypt
+enDc = userEnDc('Would you like to encode or decode a message? \n [Press 1 for encode or press 2 for decode]')
+# encodes if value is true 
+if enDc:
+    print('encode')
+# decodes if value is false
+else:
+    print('decode')
