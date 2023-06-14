@@ -1,21 +1,13 @@
 # T0 this is the first option 
 # T1 this is the second option
 
+# imports
+import shelve as s
+
 # Global varible set-up
 error_highlight = '*****'
 
 # Functions
-def num_checker(nameInput):
-    # checks that the user doesn't input any numbers, and doesn't leave it blacnk
-    while True:
-        nameStr = input(nameInput)
-        if any(char.isdigit() for char in nameStr):
-            print('{}Please do not add integers{}'.format(error_highlight, error_highlight))
-        elif len(nameStr) == 0:
-            print('{}Please enter a name!{}'.format(error_highlight, error_highlight))
-        else:
-            break
-    return nameStr
 
 def instructions(yesNo):
     # loop checks what the user chooses and acts accordingly
@@ -69,11 +61,41 @@ def cipherChoice(choice):
 
 # **********************************************
 # Main program
+shelve_file = s.open('storeUsername')
 
-# Welcome user ask for name
+# Welcome user
 print('Hello! Welcome to the cipher program')
-name = num_checker('Please enter your name: ')
-print('Welcome ' + name)
+
+# creating a username
+userName = []
+createUser = input('Please create a username: ')
+userName.append(createUser)
+shelve_file['userName'] = userName
+shelve_file.close()
+
+shelve_file = s.open('storeUsername')
+
+# print old data
+print(f'Old Data = {shelve_file["userName"]}')
+
+# update data 
+shelve_file['userName'] = userName
+
+# print updated data 
+print(f'Updated Data = {shelve_file["userName"]}')
+
+# to make changes permanent
+shelve_file.sync()
+
+# now, we simply close the shelf file.
+shelve_file.close()
+
+# pulling old usernames
+shelve_file = s.open('storeUsername')
+oldUser = shelve_file['userName']
+shelve_file.close()
+print(oldUser)
+
 
 # asks if the user wants to view instructions, and acts accordingly
 instructions('Would you like to read the instructions, (enter "y" or "n"):')
