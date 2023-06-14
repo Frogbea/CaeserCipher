@@ -1,5 +1,6 @@
 # 1.1 welcome the user [finished]
-# 1.2 instructions [current]
+# 1.2 instructions [finished]
+# 1.3 which cipher encode/decode
 
 # global (constant?) varibles
 error_highlight = '*****'
