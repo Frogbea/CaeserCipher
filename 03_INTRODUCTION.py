@@ -94,8 +94,11 @@ if enDc:
         print('playfair encode')
 # decodes if value is false
 else:
+    # ask user which cipher
     dcCipher = cipherChoice('Would you like to decode using the Caser cipher or the Playfair cipher? \n [Press 1 for Caeser (sn) or press 2 for Playfair]:')
+    # if true caeser
     if dcCipher:
         print('caeser(sn) decode')
+    # if false playfair
     else:
         print('playfair decode')
