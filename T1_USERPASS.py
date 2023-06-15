@@ -4,11 +4,23 @@
 # imports
 import json as j
 import os
+import os.path
 
 # Global varible set-up
 error_highlight = '*****'
+userName = ['initial value']
+filename = 'storeUser.json'
 
 # Functions
+
+def jSetup():
+    # creating new file is user doesn't have one
+    if not os.path.exists(filename):
+        with open(filename, mode='w') as f:
+            j.dump(userName, f)
+    # making list readable for json file
+    jDump = j.dumps(userName)
+    jData = j.loads(jDump)
 
 def instructions(yesNo):
     # loop checks what the user chooses and acts accordingly
@@ -59,26 +71,7 @@ def cipherChoice(choice):
             # prints error if user does anything else
             print('{}Please enter 1 or 2!{}'.format(error_highlight, error_highlight))
 
-
-# **********************************************
-# Main program
-# setting up the file/information for storing usernames
-filename = 'storeUser.json'
-userName = ['initial value']
-# with open(filename, mode='w') as f:
-    # j.dump(userName, f)
-jDump = j.dumps(userName)
-jData = j.loads(jDump)
-
-
-# Welcome user
-print('Hello! Welcome to the cipher program')
-
-# ask for previous user
-prevUser = input('Do you already have a username?').lower()
-if prevUser == 'yes':
-    print('welcome or whatever')
-elif prevUser == 'no':
+def createStoreUser():
     # reads previous data
     file = open(filename, 'r')
     userName = j.load(file)
@@ -90,6 +83,29 @@ elif prevUser == 'no':
     file = open(filename, 'w')
     j.dump(userName, file)
     file.close()
+
+def checkPrevUser():
+    prevUserInput = input('Please enter your username:')
+    with open(filename, 'r') as file:
+        data = j.load(file)
+    if prevUserInput in data:
+        print('Welcome back')
+    else:
+        print('fix)')
+
+# **********************************************
+# Main program
+# setting up the file/information for storing usernames
+jSetup()
+# Welcome user
+print('Hello! Welcome to the cipher program')
+
+# ask for previous user
+prevUser = input('Do you already have a username?').lower()
+if prevUser == 'yes':
+    checkPrevUser()
+elif prevUser == 'no':
+    createStoreUser()
 
 # asks if the user wants to view instructions, and acts accordingly
 instructions('Would you like to read the instructions, (enter "y" or "n"):')
