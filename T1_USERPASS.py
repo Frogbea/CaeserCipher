@@ -85,13 +85,17 @@ def createStoreUser():
     file.close()
 
 def checkPrevUser():
-    prevUserInput = input('Please enter your username:')
-    with open(filename, 'r') as file:
-        data = j.load(file)
-    if prevUserInput in data:
-        print('Welcome back')
-    else:
-        print('fix)')
+    i = 5
+    while i >= 0:
+        prevUserInput = input('Please enter your username:')
+        with open(filename, 'r') as file:
+            data = j.load(file)
+        if prevUserInput in data:
+            print("Welcome back {} it's good to see you again".format(prevUserInput))
+            break
+        else:
+            print('{}Sorry that username is not in the database, you have {} attempts left{}'.format(error_highlight, i, error_highlight))
+            i -= 1
 
 # **********************************************
 # Main program
