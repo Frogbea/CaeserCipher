@@ -7,6 +7,7 @@ import os
 import os.path
 import sys as s
 
+
 # Global varible set-up
 error_highlight = '*****'
 userName = ['initial value']
@@ -51,22 +52,30 @@ def user12(message):
             elif enDcinput == 2:
                 return False
                 break
-        except ValueError:
+            else:
+                print('{}Please enter 1 or 2!{}'.format(error_highlight, error_highlight))
+        except:
             # prints error if user does anything else
             print('{}Please enter 1 or 2!{}'.format(error_highlight, error_highlight))
 
-def createStoreUser():
+def createStoreUser(userexsit):
     # reads previous data
     file = open(filename, 'r')
     userName = j.load(file)
     file.close()
     # creates new username
     createUser = input('Please create a username:')
-    userName.append(createUser)
-    # adds new userna,e to file
-    file = open(filename, 'w')
-    j.dump(userName, file)
-    file.close()
+    if createUser in userName:
+        print('User {} already exsits. Would you like to log in as {}?'.format(createUser, createUser))
+        userExistmes = input(userexsit)
+        return userExistmes
+    else:
+        userName.append(createUser)
+        # adds new userna,e to file
+        file = open(filename, 'w')
+        j.dump(userName, file)
+        file.close()
+        print('Welcome to the program {}'.format(createUser))
 
 def checkPrevUser(message):
     i = 5
@@ -92,18 +101,18 @@ jSetup()
 print('Hello! Welcome to the cipher program')
 
 # ask for previous user
-prevUser = input('Do you already have a username?').lower()
-if prevUser == 'yes':
-    prevUserBoolen = checkPrevUser('Please enter your username')
+prevUser = user12('Do you already have a username?\n [Press 1 for yes or press 2 for no]')
+if prevUser:
+    prevUserBoolen = checkPrevUser('Please enter your username:')
     if not prevUserBoolen:
         quitCreate = user12('Would you like to create a new username? \n [Press 1 for yes or press 2 for no]')
         if quitCreate:
             createStoreUser()
         else:
-            print('Ending program..!')
+            print('You must have a username to use this program! \n Ending program..!')
             s.exit(0)
-elif prevUser == 'no':
-    createStoreUser()
+else:
+    userExsit = createStoreUser('[Press 1 for yes or press 2 for no]')
 
 # asks if the user wants to view instructions, and acts accordingly
 instructions('Would you like to read the instructions, (enter "y" or "n"):')
