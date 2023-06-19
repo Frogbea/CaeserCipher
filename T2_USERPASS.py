@@ -62,9 +62,13 @@ def createStoreUser():
     file = open(filename, 'r')
     userName = j.load(file)
     file.close()
-    # creates new username
-    createUser = input('Please create a username:')
-    # if username already exsists doesn't make a new one
+    while True:
+        # creates new username
+        createUser = input('Please create a username:')
+        if len(createUser) != 0:
+            break
+        print('{}Please enter a username!{}'.format(error_highlight, error_highlight))
+        # if username already exsists doesn't make a new one
     if createUser in userName:
         print('User {} already exsits. Would you like to log in as {}?'.format(createUser, createUser))
         return True
@@ -99,7 +103,7 @@ def checkPrevUser(message):
 
 def enterpass():
     i = 3
-    while 1 >= 0:
+    while i >= 0:
         print('Please enter your password below:')
         checkUserPass = hidePass()
         # opens & reads file
@@ -165,7 +169,7 @@ def userWrong():
     if quitCreate:
         createStoreUser()
         newPass()
-        print('Welcome! :)')
+        print('Password created successfully! Welcome :)')
     # ends program
     else:
         print('You must have a username & password to use this program! \n Ending program..!')
