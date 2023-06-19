@@ -215,6 +215,7 @@ if __name__ == '__main__':
                 print('You need to make a new username to continue.')
                 createStoreUser()
         newPass()
+        print('Welcome to the program!')
 
     # asks if the user wants to view instructions, and acts accordingly
     instructions('Would you like to read the instructions, (enter "y" or "n"):')
