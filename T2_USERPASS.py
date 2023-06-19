@@ -4,7 +4,7 @@
 
 # imports
 import json as j, os, os.path, sys as s
-from getpass import getpass
+import msvcrt as m
 
 # Global varible set-up
 error_highlight = '*****'
@@ -87,7 +87,7 @@ def checkPrevUser(message):
             data = j.load(file)
         # checks if username is in data
         if prevUserInput in data:
-            print("Welcome back {} it's good to see you again".format(prevUserInput))
+            print("Welcome {} it's good to see you again".format(prevUserInput))
             prevUserInput = True
             break
         # if they don't get it they have to repeat
@@ -98,19 +98,78 @@ def checkPrevUser(message):
     return prevUserInput
 
 def enterpass():
-    pass
+    i = 3
+    while 1 >= 0:
+        print('Please enter your password below:')
+        checkUserPass = hidePass()
+        # opens & reads file
+        with open(filename, 'r') as file:
+            data = j.load(file)
+        # checks password is correct
+        if checkUserPass in data:
+            print('That password was correct! Welcome back :)')
+            checkUserPass = True
+            break
+        else:
+            print('{}Sorry that password is not correct, you have {} tries left{}'.format(error_highlight, i, error_highlight))
+            checkUserPass = False
+            i -= 1
+    return checkUserPass
 
-def newPass(passInput):
+def hidePass():
+    password = ''
+    if s.stdin.isatty():
+        while True:
+            # gathers each individual character using getch
+            char = m.getch()
+            # if enter key break loop, save password
+            if ord(char) == 13:  # Enter key
+                if len(password) == 0:
+                    print('{}Please make a password:'.format(error_highlight))
+                    continue
+                print()
+                break
+            # if backspace delete
+            elif ord(char) == 8:  # Backspace key
+                if len(password) > 0:
+                    password = password[:-1]
+                    s.stdout.write("\b \b")
+            # replaces characters with *
+            else:
+                password += char.decode("utf-8")
+                s.stdout.write("*")
+    return password
+
+def newPass():
     # reads previous data
     file = open(filename, 'r')
     password = j.load(file)
     file.close()
-    # creates and dumps new password
-    createNewPass = getpass(passInput)
-    password.append(createNewPass)
-    file = open(filename, 'w')
-    j.dump(password, file)
-    file.close()
+    while True:
+        # creates and dumps new password
+        print('Please enter your new password below [please do not add any personal data & makesure to remeber your password!]:')
+        createNewPass = hidePass()
+        if createNewPass in password:
+            print('{}This password already exists please enter a new one!{}'.format(error_highlight, error_highlight))
+        else:
+            password.append(createNewPass)
+            file = open(filename, 'w')
+            j.dump(password, file)
+            file.close()
+            break
+
+def userWrong():
+    # asks if user would like to make new one because didn't get username in 5 tries
+    quitCreate = user12('Would you like to create a new username & password? \n [Press 1 for yes or press 2 for no]')
+    # creates new user
+    if quitCreate:
+        createStoreUser()
+        newPass()
+        print('Welcome! :)')
+    # ends program
+    else:
+        print('You must have a username & password to use this program! \n Ending program..!')
+        s.exit(0)
 
 # **********************************************
 # Main program
@@ -124,19 +183,15 @@ if __name__ == '__main__':
     prevUser = user12('Do you already have a username and password?\n [Press 1 for yes or press 2 for no]')
     # if yes ask to enter it
     if prevUser:
+        # user enters username
         prevUserBoolen = checkPrevUser('Please enter your username:')
         # if they don't get it in 5 tries
         if not prevUserBoolen:
-            quitCreate = user12('Would you like to create a new username? \n [Press 1 for yes or press 2 for no]')
-            # creates new user
-            if quitCreate:
-                createStoreUser()
-            # ends program
-            else:
-                print('You must have a username to use this program! \n Ending program..!')
-                s.exit(0)
+            userWrong()
         else:
-            enterPass = enterpass('Please enter your password:')
+            enterPass = enterpass()
+            if not enterPass:
+                userWrong()
     # helps user create new username
     else:
         # create new user
@@ -152,7 +207,7 @@ if __name__ == '__main__':
             else:
                 print('You need to make a new username to continue.')
                 createStoreUser()
-        createpass = newPass('Please enter your new password:')
+        newPass()
 
     # asks if the user wants to view instructions, and acts accordingly
     instructions('Would you like to read the instructions, (enter "y" or "n"):')
