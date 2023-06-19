@@ -3,11 +3,13 @@
 # T2 the is the third option - username and password
 
 # imports
-import json as j, os, os.path, sys as s,
+import json as j, os, os.path, sys as s
+from getpass import getpass
 
 # Global varible set-up
 error_highlight = '*****'
 userName = ['initial value']
+password = ['inital value']
 filename = 'storeUser.json'
 
 # Functions
@@ -95,6 +97,21 @@ def checkPrevUser(message):
             i -= 1
     return prevUserInput
 
+def enterpass():
+    pass
+
+def newPass(passInput):
+    # reads previous data
+    file = open(filename, 'r')
+    password = j.load(file)
+    file.close()
+    # creates and dumps new password
+    createNewPass = getpass(passInput)
+    password.append(createNewPass)
+    file = open(filename, 'w')
+    j.dump(password, file)
+    file.close()
+
 # **********************************************
 # Main program
 if __name__ == '__main__':
@@ -104,7 +121,7 @@ if __name__ == '__main__':
     print('Hello! Welcome to the cipher program')
 
     # ask for previous user
-    prevUser = user12('Do you already have a username?\n [Press 1 for yes or press 2 for no]')
+    prevUser = user12('Do you already have a username and password?\n [Press 1 for yes or press 2 for no]')
     # if yes ask to enter it
     if prevUser:
         prevUserBoolen = checkPrevUser('Please enter your username:')
@@ -118,6 +135,8 @@ if __name__ == '__main__':
             else:
                 print('You must have a username to use this program! \n Ending program..!')
                 s.exit(0)
+        else:
+            enterPass = enterpass('Please enter your password:')
     # helps user create new username
     else:
         # create new user
@@ -133,6 +152,7 @@ if __name__ == '__main__':
             else:
                 print('You need to make a new username to continue.')
                 createStoreUser()
+        createpass = newPass('Please enter your new password:')
 
     # asks if the user wants to view instructions, and acts accordingly
     instructions('Would you like to read the instructions, (enter "y" or "n"):')
