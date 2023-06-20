@@ -9,11 +9,15 @@ def caesarEncode(encodeinput):
     result = ''
     caesarenInput = input(encodeinput)
     for i in range(len(caesarenInput)):
-        c = encodeinput[i]
+        c = caesarenInput[i]
         # checkk for spaces
         if c == ' ':
             result += ' '
-        # shifts every chatacter by 13
+        # shifts the numbers individually
+        elif c.isdigit():
+            cNum = (int(c) + shift) % 10
+            result += str(cNum)
+        # shifts every lowercase alphebetical chatacter by 13
         else:
             result += chr((ord(c) + shift-97) % 26 + 97)
     return result
