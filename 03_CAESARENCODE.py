@@ -2,28 +2,29 @@
 # V2 fixing output
 # V3 loopup method trial
 
+# imports
+import string as s
+import sys
+
 # constant(global) varibles
 shift = 13
+ExtChar = s.ascii_lowercase + s.digits +  ' ' + s.punctuation
 
 # functions
-def caesarEncode(encodeinput):
-    result = ''
-    caesarenInput = input(encodeinput)
-    for i in range(len(caesarenInput)):
-        c = caesarenInput[i]
-        # checkk for spaces
-        if c == ' ':
-            result += ' '
-        # shifts the numbers individually
-        elif c.isdigit():
-            cNum = (int(c) + shift) % 10
-            result += str(cNum)
-        # shifts every lowercase alphebetical chatacter by 13
-        else:
-            result += chr((ord(c) + shift-97) % 26 + 97)
-    return result
-
+def caesarEncode(encodeinput, characters):
+    userInput = input(encodeinput).lower()
+    table = str.maketrans(characters, characters[shift:]+characters[:shift])
+    encodeText = userInput.translate(table)
+    return encodeText
+    
 # **************************************************************************************************
 # Main
-printCaEn = caesarEncode('Please enter the message you want to encode:').lower()
-print(printCaEn)
+while True:
+    printCaEn = caesarEncode('Please enter the message you want to encode:', ExtChar)
+    print('Here is your encoded message: \n' + printCaEn)
+    repeat = input('Would you like to use it again?')
+    if repeat == 1:
+        continue
+    else:
+        print('Thank your for using this program!')
+        sys.exit(0)
