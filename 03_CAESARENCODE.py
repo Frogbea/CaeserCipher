@@ -22,7 +22,7 @@ def caesarEncode(encodeinput, characters):
 while True:
     printCaEn = caesarEncode('Please enter the message you want to encode:', ExtChar)
     print('Here is your encoded message: \n' + printCaEn)
-    repeat = input('Would you like to use it again?')
+    repeat = input('Would you like to use it again? \n [Press 1 for yes or press 2 for no]')
     if repeat == 1:
         continue
     else:
