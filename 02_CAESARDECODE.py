@@ -3,6 +3,7 @@
 
 # imports
 import string as s
+import sys
 
 # constant(global) varibles
 shift = 13
@@ -18,5 +19,12 @@ def caesardecode(decodeInput, characters):
 
 # ********************************************************************
 # Main
-caesarOutput = caesardecode('Please enter the encrypted message that you want to decode:', ExtChar)
-print('Here is your decoded message:\n', caesarOutput)
+while True:
+    caesarOutput = caesardecode('Please enter the encrypted message that you want to decode:', ExtChar)
+    print('Here is your decoded message:\n', caesarOutput)
+    repeatDc = int(input('Would you like to use it again?\n[Press 1 for yes or press 2 for no]'))
+    if repeatDc == 1:
+        continue
+    else:
+        print('Thank you for using this program!')
+        sys.exit(0)
