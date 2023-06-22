@@ -243,7 +243,7 @@ if __name__ == '__main__':
     # encodes if value is true 
     if enDc:
         # ask user which cipher
-        enCipher = user12('Would you like to encode using the Caser cipher or the Playfair cipher? \n [Press 1 for Caeser (sn) or press 2 for Playfair]:')
+        enCipher = user12('Would you like to encode using the Caesar cipher or the Playfair cipher? \n [Press 1 for Caesar or press 2 for Playfair]:')
         # if true caeser
         if enCipher:
            # caesar encode loop
@@ -262,7 +262,7 @@ if __name__ == '__main__':
             print('playfair encode')
     # decodes if value is false
     else:
-        dcCipher = user12('Would you like to decode using the Caser cipher or the Playfair cipher? \n [Press 1 for Caeser (sn) or press 2 for Playfair]:')
+        dcCipher = user12('Would you like to decode using the Caesar cipher or the Playfair cipher? \n [Press 1 for Caesar or press 2 for Playfair]:')
         if dcCipher:
             # caesar decoding code
             while True:
