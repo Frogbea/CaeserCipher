@@ -189,6 +189,12 @@ def caesarEncode(encodeinput, characters):
     encodeText = userInput.translate(table)
     return encodeText
 
+def caesardecode(decodeInput, characters):
+    caesarInput = input(decodeInput)
+    newShift = -shift
+    table = str.maketrans(characters, characters[newShift:]+characters[:newShift])
+    translated_text = caesarInput.translate(table)
+    return translated_text
 
 # ****************************************************************************************************
 # Main program
@@ -245,6 +251,7 @@ if __name__ == '__main__':
             printCaEn = caesarEncode('Please enter the message you want to encode:', ExtChar)
             print('Here is your encoded message: \n' + printCaEn)
             repeat = user12('Would you like to use it again? \n [Press 1 for yes or press 2 for no]')
+            # Ceasar encode repeat
             if repeat:
                 continue
             else:
@@ -257,6 +264,16 @@ if __name__ == '__main__':
     else:
         dcCipher = user12('Would you like to decode using the Caser cipher or the Playfair cipher? \n [Press 1 for Caeser (sn) or press 2 for Playfair]:')
         if dcCipher:
-            print('caeser(sn) decode')
+            # caesar decoding code
+            while True:
+                caesarOutput = caesardecode('Please enter the encrypted message that you want to decode:', ExtChar)
+                print('Here is your decoded message:\n', caesarOutput)
+                repeatDc = user12('Would you like to use it again?\n[Press 1 for yes or press 2 for no]')
+                # repeat code
+                if repeatDc:
+                    continue
+                else:
+                    print('Thank you for using this program!')
+                    s.exit(0)
         else:
             print('playfair decode')
