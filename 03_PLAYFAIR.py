@@ -7,6 +7,9 @@ import string as st
 
 #constants
 key = 'poise'
+
+#functions
+
 def noNum(Ninput):
     while True:
         noNumInput = input(Ninput).replace(' ', '')
@@ -15,7 +18,8 @@ def noNum(Ninput):
             continue
         else:
             break
-#functions
+    return noNumInput
+
 def matrixKey(key):
     key = key.upper()
     matrix = [[0 for i in range (5)] for j in range(5)]
@@ -59,5 +63,5 @@ def matrixKey(key):
 Matrix = matrixKey(key)
 
 orgInput = noNum('Please enter the message you would like to encode:')
-playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation))
+playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation)).replace(' ', '')
 print(playFairEn)
