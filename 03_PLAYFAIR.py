@@ -1,5 +1,6 @@
 # v1 making the matrix
 # v2 removing spaces and puncuation from inputs
+# v3 rejecting numbers
 #imports
 
 import string as st
