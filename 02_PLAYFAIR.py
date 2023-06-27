@@ -50,5 +50,6 @@ def matrixKey(key):
 # this is the key table for the cipher
 Matrix = matrixKey(key)
 
-playFairEn = input('Please enter the message you would like to encode:').replace(' ', '')
+orgInput = input('Please enter the message you would like to encode:').replace(' ', '')
+playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation))
 print(playFairEn)
