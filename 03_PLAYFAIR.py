@@ -7,7 +7,14 @@ import string as st
 
 #constants
 key = 'poise'
-
+def noNum(Ninput):
+    while True:
+        noNumInput = input(Ninput).replace(' ', '')
+        if any(char.isdigit() for char in noNumInput):
+            print('Please do not enter any numbers')
+            continue
+        else:
+            break
 #functions
 def matrixKey(key):
     key = key.upper()
@@ -51,6 +58,6 @@ def matrixKey(key):
 # this is the key table for the cipher
 Matrix = matrixKey(key)
 
-orgInput = input('Please enter the message you would like to encode:').replace(' ', '')
+orgInput = noNum('Please enter the message you would like to encode:')
 playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation))
 print(playFairEn)
