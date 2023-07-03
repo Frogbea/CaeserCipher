@@ -7,7 +7,7 @@
 import string as st
 
 #constants
-key = 'poise'
+playkey = 'poise'
 
 #functions
 
@@ -57,12 +57,73 @@ def matrixKey(key):
             matrix[i][j] = charAdd[index]
             index += 1
     return matrix
+'''
+def pair(message):
+    pair = []
+    group = 0
+    for i in range(2, len(message), 2):
+        pair.append(message[group:i])
+        group = i
+    pair.append(message[group:])
+    return pair
+'''
+def sameChar(message):
+    j = len(message)
+    if j % 2 == 0:
+        for i in range(0, j, 2):
+            if message[i] == message[i + 1]:
+                newWord = message[0: i + 1] + str('X') + message[i + 1]
+                newWord = sameChar(newWord)
+                break
+            else:
+                newWord = message
+    else:
+        for i in range(0, j - 1, 2):
+            if message[i] == message[i + 1]:
+                newWord = message[0: i + 1] + str('X') + message[i + 1:]
+                newWord = sameChar(newWord)
+        else:
+            newWord = message
+    return newWord
+
+def index(letter, matrix):
+    for i in range (5):
+        try:
+            index = matrix[i].index(letter)
+            return(1, index)
+        except:
+            continue
+
+def playEncode(key, message):
+    inc = 1
+    if decode:
+        inc = -1
+    matrix = matrixKey(key)
+    message = sameChar(message)
+    cipherText = ''
+    for (l1, l2) in zip(message[0::2], message[1::2]):
+        row1, col1 = index(l1, matrix)
+        row2, col2 = index(l2, matrix)
+        if row1 == row2:
+            cipherText += matrix[row1][(col1 + inc) % 5] + matrix[row2][(col2 + inc) % 5]
+        elif col1 == col2:
+            cipherText += matrix[(row1 + inc) % 5][col1] + matrix[(row2 + inc) % 5][col2]
+        else:
+            cipherText += matrix[row1][col2] + matrix[row2][col1]
+    return cipherText
 
 #***************************************************************************************************
 #MAIN
 # this is the key table for the cipher
-Matrix = matrixKey(key)
-
+Matrix = matrixKey(playkey)
+decode = False
 orgInput = noNum('Please enter the message you would like to encode:')
-playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation))
-print(playFairEn)
+playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation)).replace(' ', '').upper()
+answer = playEncode(playkey, playFairEn)
+print(answer)
+test = input('Would u like to decode? y/n')
+if test == 'y':
+    decode = True
+    playFairDc = input('Enter your message:')
+    answer = playEncode(playkey, playFairDc)
+    print(answer)
