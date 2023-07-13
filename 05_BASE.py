@@ -5,7 +5,6 @@
 # v4 adding the caesar decoder
 # v5 adding playfair encoder
 
-
 # imports
 import json as j, os, os.path, sys as s
 import msvcrt as m, string as st
