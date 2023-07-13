@@ -23,7 +23,6 @@ def noNum(Ninput):
     return noNumInput
 
 def matrixKey(key):
-    print('matrix start')
     key = key.upper()
     matrix = [[0 for i in range (5)] for j in range(5)]
     charAdd = []
@@ -58,43 +57,33 @@ def matrixKey(key):
         for j in range(5):
             matrix[i][j] = charAdd[index]
             index += 1
-    print('matrix finish')
     return matrix
 
 def sameChar(message):
-    print('Samechar start')
     index = 0
     while index < len(message):
         l1 = message[index]
         if index == len(message) - 1:
             message = message + 'X'
             index += 2
-            print('if last character is reached')
             break
         l2 = message[index + 1]
         if l1 == l2:
             message = message[:index + 1] + 'X' + message[index + 1:]
             index += 2
-            print('x added to same char')
         else:
             index += 1
-        print('loop continued')
-    print('sameChar finish')
     return message
 
 def index(letter, matrix):
-    print('indexstart')
     for i in range (5):
         try:
             index = matrix[i].index(letter)
-            ('index finish')
             return(i, index)
         except:
-            ('In loop')
             continue
 
 def playEncode(key, message):
-    print('encode start')
     inc = -1
     matrix = matrixKey(key)
     message = sameChar(message)
@@ -103,28 +92,20 @@ def playEncode(key, message):
         row1, col1 = index(l1, matrix)
         row2, col2 = index(l2, matrix)
         if row1 == row2:
-            print('first rule')
             cipherText += matrix[row1][(col1 + inc) % 5] + matrix[row2][(col2 + inc) % 5]
         elif col1 == col2:
-            print('second rule')
             cipherText += matrix[(row1 + inc) % 5][col1] + matrix[(row2 + inc) % 5][col2]
         else:
-            print('third rule')
             cipherText += matrix[row1][col2] + matrix[row2][col1]
-    print('encode finish')
     return cipherText
 
 
 #***************************************************************************************************
 #MAIN
 # this is the key table for the cipher
-print('test')
 orgInput = noNum('Please enter the message you would like to encode:')
-print('test1')
 playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation)).replace(' ', '').upper()
-print('test2')
 answer = playEncode(playkey, playFairEn)
-print('test3')
 print('this is the message: ' + answer)
 
 
