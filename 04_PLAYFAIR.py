@@ -63,16 +63,21 @@ def matrixKey(key):
 def sameChar(message):
     print('Samechar start')
     index = 0
-    while (index < len(message)):
+    while index < len(message):
         l1 = message[index]
         if index == len(message) - 1:
             message = message + 'X'
             index += 2
-            continue
+            print('if last character is reached')
+            break
         l2 = message[index + 1]
         if l1 == l2:
             message = message[:index + 1] + 'X' + message[index + 1:]
             index += 2
+            print('x added to same char')
+        else:
+            index += 1
+        print('loop continued')
     print('sameChar finish')
     return message
 
@@ -89,7 +94,7 @@ def index(letter, matrix):
 
 def playEncode(key, message):
     print('encode start')
-    inc = 1
+    inc = -1
     matrix = matrixKey(key)
     message = sameChar(message)
     cipherText = ''
