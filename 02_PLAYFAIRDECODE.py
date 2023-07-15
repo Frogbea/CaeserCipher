@@ -29,7 +29,7 @@ def matrixKey(key):
     row = 0
     col = 0
     # add key word to matrix
-    for letter in key:
+    for letter in key:      
         # add key word to the top of the matrix
         if letter not in charAdd:
             matrix[row][col] = letter
@@ -115,4 +115,4 @@ def playfair(key, message, playDecode):
 # MAIN
 playDc = input('Please enter the message you would like to decode:').upper()
 result = playfair(playkey, playDc, True)    
-print('Here is your decoded message: \n' + result)
+print('Here is your decoded message: \n' + result.lower())

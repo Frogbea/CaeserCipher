@@ -365,7 +365,7 @@ if __name__ == '__main__':
             # playfair encode loop
             while True:
                 orgInput = noNum('Please enter the message you would like to encode:')
-                playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation)).replace(' ', '').upper()
+                playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation)).upper()
                 answer = playEncode(playkey, playFairEn)
                 print('Here is your encoded message: \n' + answer)
                 repeatPlayen = user12('Would you like to use the encoder again? \n [Press1 for yes and 2 for no]')
