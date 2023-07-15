@@ -349,37 +349,37 @@ if __name__ == '__main__':
     # loop for cipher codes
     while True:
         # ask if user wants to encrypt or depcrypt
-        enDc = user12('Would you like to encode or decode a message? \n [Press 1 to encode message or press 2 to decode it]:')
+        enDc = user12('\n Would you like to encode or decode a message? \n [Press 1 to encode message or press 2 to decode it]:')
         # encodes if value is true 
         if enDc:
             # ask user which cipher
-            enCipher = user12('Would you like to encode using the Caesar cipher or the Playfair cipher? \n [Press 1 for Caesar or press 2 for Playfair]:')
+            enCipher = user12('\n Would you like to encode using the Caesar cipher or the Playfair cipher? \n [Press 1 for Caesar or press 2 for Playfair]:')
             # if true caeser
             if enCipher:
                 # caesar encode loop
-                printCaEn = caesarEncode('Please enter the message you want to encode:', ExtChar)
+                printCaEn = caesarEncode('\nPlease enter the message you want to encode:', ExtChar)
                 print('Here is your encoded message: \n {} \n {} \n {}'.format(boxDeco, printCaEn, boxDeco))
             # if false playfair
             else:
                 # playfair encode loop
-                orgInput = noNum('Please enter the message you would like to encode:')
+                orgInput = noNum('\nPlease enter the message you would like to encode:')
                 playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation)).replace(' ', '').upper()
                 answer = playfair(playkey, playFairEn, False)
                 print('Here is your encoded message: \n {} \n {} \n {}'.format(boxDeco, answer, boxDeco))
         # decodes if value is false
         else:
-            dcCipher = user12('Would you like to decode using the Caesar cipher or the Playfair cipher? \n [Press 1 for Caesar or press 2 for Playfair]:')
+            dcCipher = user12('\n Would you like to decode using the Caesar cipher or the Playfair cipher? \n [Press 1 for Caesar or press 2 for Playfair]:')
             if dcCipher:
                 # caesar decoding code
-                caesarOutput = caesardecode('Please enter the encrypted message that you want to decode:', ExtChar)
+                caesarOutput = caesardecode('\nPlease enter the encrypted message that you want to decode:', ExtChar)
                 print('Here is your decoded message: \n {} \n {} \n {}'.format(boxDeco, caesarOutput, boxDeco))
             else:
                 # playfair decoding code
-                playDc = noNum('Please enter the message you would like to decode:').upper()
+                playDc = noNum('\nPlease enter the message you would like to decode:').upper()
                 result = playfair(playkey, playDc, True)    
                 print('Here is your decoded message: \n {} \n {} \n {}'.format(boxDeco, result.lower(), boxDeco))
         # code to repeat the whole thing
-        repeat = user12('Would you like to use this again? \n [Press 1 for yes or press 2 for no]:')
+        repeat = user12('\n Would you like to use this again? \n [Press 1 for yes or press 2 for no]:')
         if repeat:
             continue
         else:
