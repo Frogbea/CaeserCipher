@@ -280,9 +280,12 @@ def index(letter, matrix):
         except:
             continue
 
-def playEncode(key, message):
+def playfair(key, message, playDecode):
     # set up the key and message
-    inc = -1
+    inc = 1
+    # for decodeing
+    if playDecode:
+        inc = -1
     matrix = matrixKey(key)
     message = sameChar(message)
     cipherText = ''
@@ -368,7 +371,7 @@ if __name__ == '__main__':
             while True:
                 orgInput = noNum('Please enter the message you would like to encode:')
                 playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation)).replace(' ', '').upper()
-                answer = playEncode(playkey, playFairEn)
+                answer = playfair(playkey, playFairEn, False)
                 print('Here is your encoded message: \n' + answer)
                 repeatPlayen = user12('Would you like to use the encoder again? \n [Press1 for yes and 2 for no]')
                 # repeat encode statements
@@ -393,4 +396,13 @@ if __name__ == '__main__':
                     print('Thank you for using this program!')
                     s.exit(0)
         else:
-            print('playfair decode')
+            while True:
+                playDc = noNum('Please enter the message you would like to decode:').upper()
+                result = playfair(playkey, playDc, True)    
+                print('Here is your decoded message: \n' + result.lower())
+                repeatPlDc = user12('Would you like to use it again?\n[Press 1 for yes or press 2 for no]')
+                if repeatPlDc:
+                    continue
+                else:
+                    print('Thank you for using this program!')
+                    s.exit(0)
