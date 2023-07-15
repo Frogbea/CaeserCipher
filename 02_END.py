@@ -32,7 +32,7 @@ def instructions(yesNo):
     while True:
         instrucView = input(yesNo).lower()
         if instrucView == 'y':
-            print('{} \n >>>> The encryption and decryption processes used in this program are unique! This means that if you encode something using this program, it can only be decoded using this program. \n >>>> Your username and password are both stored so please do not enter any personal details, and remember to make your password unique. \n >>>> Make sure to read the prompts before selecting 1 for yes or 2 for no (dont worry about remembering that, its said in every question). \n >>>> You can input anything into the caesar cipher, but the playfair cipher does not encode numbers, puncuation, or spaces. Enjoy! :) \n {}'.format(boxDeco, boxDeco))
+            print('{} \n >>>> The encryption and decryption processes used in this program are unique! This means that if you encode something using this program, it can only be decoded using this program. \n \n >>>> Your username and password are both stored so please do not enter any personal details, and remember to make your password unique. \n \n >>>> Make sure to read the prompts before selecting 1 for yes or 2 for no (dont worry about remembering that, its said in every question). \n \n >>>> If you do not know what the Playfair or Caesar ciphers are (or want to learn more about them) please vist this link: https://en.wikipedia.org/wiki/Playfair_cipher for the Playfair cipher or this one: https://en.wikipedia.org/wiki/Caesar_cipher for the Caesar cipher. \n \n >>>> You can input anything into the caesar cipher, but the playfair cipher does not encode numbers, puncuation, or spaces. Enjoy! :) \n {}'.format(boxDeco, boxDeco))
             break
         elif len(instrucView) == 0:
             print('{}Please enter "y" for yes or "n" for no!{}'.format(error_highlight, error_highlight))
@@ -101,7 +101,7 @@ def createStoreUser():
 
 def checkPrevUser(message):
     # while loop 5 times
-    i = 5
+    i = 3
     while i >= 0:
         prevUserInput = input(message)
         # reads information in file
@@ -170,7 +170,7 @@ def newPass():
     file.close()
     while True:
         # creates and dumps new password
-        print('Please enter your new password below [please do not add any personal data & makesure to remeber your password!]:')
+        print('Please enter your new password below [Please do not make it the same as your username!!]:')
         createNewPass = hidePass()
         if createNewPass in password:
             print('{}This password already exists please enter a new one!{}'.format(error_highlight, error_highlight))
@@ -305,13 +305,13 @@ if __name__ == '__main__':
     # setting up the file/information for storing usernames
     jSetup()
     # Welcome user
-    print('Hello! Welcome to the cipher program')
+    print('Hello! Welcome to the cipher program.')
 
     # asks if the user wants to view instructions, and acts accordingly
     instructions('Would you like to read the instructions, (enter "y" or "n"):')
 
     # ask for previous user
-    prevUser = user12('Do you already have a username and password?\n [Press 1 for yes or press 2 for no]:')
+    prevUser = user12('Do you *already* have a username and password?\n [Press 1 for yes or press 2 for no]:')
     # if yes ask to enter it
     if prevUser:
         # user enters username
