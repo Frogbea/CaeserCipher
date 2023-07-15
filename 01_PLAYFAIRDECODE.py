@@ -86,9 +86,11 @@ def index(letter, matrix):
         except:
             continue
 
-def playEncode(key, message):
+def playfair(key, message, playDecode):
      # set up the key and message
-    inc = -1
+    inc = 1
+    if playDecode:
+        inc = -1
     matrix = matrixKey(key)
     message = sameChar(message)
     cipherText = ''
@@ -107,4 +109,9 @@ def playEncode(key, message):
             cipherText += matrix[row1][col2] + matrix[row2][col1]
     return cipherText
 
+
+
 # MAIN
+playDc = input('Please enter the message you would like to decode:').upper()
+result = playfair(playkey, playDc, True)    
+print('Here is your decoded message: \n' + result)

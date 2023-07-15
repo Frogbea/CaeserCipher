@@ -280,7 +280,7 @@ def index(letter, matrix):
 
 def playEncode(key, message):
     # set up the key and message
-    inc = -1
+    inc = 1
     matrix = matrixKey(key)
     message = sameChar(message)
     cipherText = ''
