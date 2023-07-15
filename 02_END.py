@@ -1,4 +1,5 @@
 # v1 fixing repeat loops
+# v2 changin result output
 
 # imports
 import json as j, os, os.path, sys as s
