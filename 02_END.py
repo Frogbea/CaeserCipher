@@ -7,6 +7,7 @@ import msvcrt as m, string as st
 
 # Global/constant varible set-up
 error_highlight = '*****'
+boxDeco = '******************************************'
 userName = ['initial value']
 password = ['inital value']
 filename = 'storeUser.json'
@@ -31,7 +32,7 @@ def instructions(yesNo):
     while True:
         instrucView = input(yesNo).lower()
         if instrucView == 'y':
-            print('here are the instructions')
+            print('{} \n >>>> The encryption and decryption processes used in this program are unique! This means that if you encode something using this program, it can only be decoded using this program. \n >>>> Your username and password are both stored so please do not enter any personal details, and remember to make your password unique. \n >>>> Make sure to read the prompts before selecting 1 for yes or 2 for no (dont worry about remembering that, its said in every question). \n >>>> You can input anything into the caesar cipher, but the playfair cipher does not encode numbers, puncuation, or spaces. Enjoy! :) \n {}'.format(boxDeco, boxDeco))
             break
         elif len(instrucView) == 0:
             print('{}Please enter "y" for yes or "n" for no!{}'.format(error_highlight, error_highlight))
@@ -306,6 +307,9 @@ if __name__ == '__main__':
     # Welcome user
     print('Hello! Welcome to the cipher program')
 
+    # asks if the user wants to view instructions, and acts accordingly
+    instructions('Would you like to read the instructions, (enter "y" or "n"):')
+
     # ask for previous user
     prevUser = user12('Do you already have a username and password?\n [Press 1 for yes or press 2 for no]:')
     # if yes ask to enter it
@@ -336,10 +340,7 @@ if __name__ == '__main__':
                 createStoreUser()
         newPass()
         print('Password creation successful. Welcome to the program!')
-
-    # asks if the user wants to view instructions, and acts accordingly
-    instructions('Would you like to read the instructions, (enter "y" or "n"):')
-
+    # loop for cipher codes
     while True:
         # ask if user wants to encrypt or depcrypt
         enDc = user12('Would you like to encode or decode a message? \n [Press 1 to encode message or press 2 to decode it]:')
@@ -351,26 +352,26 @@ if __name__ == '__main__':
             if enCipher:
                 # caesar encode loop
                 printCaEn = caesarEncode('Please enter the message you want to encode:', ExtChar)
-                print('Here is your encoded message: \n' + printCaEn)
+                print('Here is your encoded message: \n {} \n {} \n {}'.format(boxDeco, printCaEn, boxDeco))
             # if false playfair
             else:
                 # playfair encode loop
                 orgInput = noNum('Please enter the message you would like to encode:')
                 playFairEn = orgInput.translate(str.maketrans('', '', st.punctuation)).replace(' ', '').upper()
                 answer = playfair(playkey, playFairEn, False)
-                print('Here is your encoded message: \n' + answer)
+                print('Here is your encoded message: \n {} \n {} \n {}'.format(boxDeco, answer, boxDeco))
         # decodes if value is false
         else:
             dcCipher = user12('Would you like to decode using the Caesar cipher or the Playfair cipher? \n [Press 1 for Caesar or press 2 for Playfair]:')
             if dcCipher:
                 # caesar decoding code
                 caesarOutput = caesardecode('Please enter the encrypted message that you want to decode:', ExtChar)
-                print('Here is your decoded message:\n', caesarOutput)
+                print('Here is your decoded message: \n {} \n {} \n {}'.format(boxDeco, caesarOutput, boxDeco))
             else:
                 # playfair decoding code
                 playDc = noNum('Please enter the message you would like to decode:').upper()
                 result = playfair(playkey, playDc, True)    
-                print('Here is your decoded message: \n' + result.lower())
+                print('Here is your decoded message: \n {} \n {} \n {}'.format(boxDeco, result.lower(), boxDeco))
         # code to repeat the whole thing
         repeat = user12('Would you like to use this again? \n [Press 1 for yes or press 2 for no]:')
         if repeat:
