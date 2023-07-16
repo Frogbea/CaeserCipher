@@ -375,7 +375,7 @@ if __name__ == '__main__':
                 print('Here is your decoded message: \n {} \n {} \n {}'.format(boxDeco, caesarOutput, boxDeco))
             else:
                 # playfair decoding code
-                playDc = noNum('\nPlease enter the message you would like to decode:').upper()
+                playDc = noNum('\nPlease enter the message you would like to decode:').upper().translate(str.maketrans('', '', st.punctuation))
                 result = playfair(playkey, playDc, True)    
                 print('Here is your decoded message: \n {} \n {} \n {}'.format(boxDeco, result.lower(), boxDeco))
         # code to repeat the whole thing
